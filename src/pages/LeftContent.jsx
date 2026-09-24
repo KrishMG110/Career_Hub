@@ -1,0 +1,3 @@
+const LeftContent = () => <aside className="w-full rounded-2xl bg-slate-900 p-6 text-white lg:w-1/3 lg:p-8"><p className="text-xs font-semibold tracking-widest text-cyan-300">CAREERHUB</p><h1 className="mt-4 text-3xl font-semibold leading-tight sm:text-4xl">Hardwork.<br /><span className="text-cyan-300">Discipline.</span><br />Consistency.</h1><p className="mt-5 max-w-sm text-sm leading-6 text-slate-300">Build a stronger professional future by learning, showing your work, and connecting with people who inspire you.</p><div className="mt-7 flex h-11 w-11 items-center justify-center rounded-full bg-cyan-400 text-xl text-slate-900"><i className="ri-arrow-right-up-line" /></div></aside>;
+
+export default LeftContent;

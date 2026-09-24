@@ -1,0 +1,14 @@
+[
+    { "id": 1, "title": "Frontend Developer", "company": "PixelCraft", "location": "Mumbai", "salary": "₹6–8 LPA", "saved": false },
+    { "id": 2, "title": "React Developer", "company": "TechNova", "location": "Bengaluru", "salary": "₹8–12 LPA", "saved": true },
+    { "id": 3, "title": "UI/UX Designer", "company": "Designly", "location": "Pune", "salary": "₹5–7 LPA", "saved": false },
+    { "id": 4, "title": "Node.js Developer", "company": "CodeSphere", "location": "Hyderabad", "salary": "₹7–10 LPA", "saved": false },
+    { "id": 5, "title": "Full Stack Developer", "company": "WebWorks", "location": "Delhi", "salary": "₹9–14 LPA", "saved": true },
+    { "id": 6, "title": "Java Developer", "company": "CloudBridge", "location": "Chennai", "salary": "₹6–9 LPA", "saved": false },
+    { "id": 7, "title": "Python Developer", "company": "DataNest", "location": "Ahmedabad", "salary": "₹7–11 LPA", "saved": false },
+    { "id": 8, "title": "Product Designer", "company": "BrightLabs", "location": "Remote", "salary": "₹8–13 LPA", "saved": true },
+    { "id": 9, "title": "DevOps Engineer", "company": "InfraCore", "location": "Noida", "salary": "₹10–15 LPA", "saved": false },
+    { "id": 10, "title": "QA Engineer", "company": "TestPilot", "location": "Kolkata", "salary": "₹4–6 LPA", "saved": false }
+    
+    
+]

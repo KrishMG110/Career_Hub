@@ -1,0 +1,26 @@
+import { useContext, useState } from "react";
+import AdminNav from "../components/AdminNav";
+import { JobContext } from "../Context/JobContext";
+import { AdminContext } from "../Context/AdminContext";
+import { PostContext } from "../Context/PostContext";
+
+const initialJob = { title: "", company: "", location: "", salary: "", type: "Full-time", description: "" };
+const Admin = () => {
+  const [job, setJob] = useState(initialJob);
+  const [message, setMessage] = useState("");
+  const { createdJobs, addJob, deleteJob } = useContext(JobContext);
+  const { admin } = useContext(AdminContext);
+  const { posts } = useContext(PostContext);
+  const activeUsers = JSON.parse(localStorage.getItem("activeUsers") || "[]");
+  const activeCount = admin.filter((user) => activeUsers.includes(user.sign_email)).length;
+  const submit = (event) => {
+    event.preventDefault();
+    if (!job.title.trim() || !job.company.trim() || !job.location.trim() || !job.salary.trim()) return setMessage("Please complete the required job details.");
+    addJob({ ...job, title: job.title.trim(), company: job.company.trim(), location: job.location.trim(), salary: job.salary.trim() });
+    setJob(initialJob); setMessage("Job opening published. It is now visible on the Jobs page.");
+  };
+  const change = (field, value) => { setJob({ ...job, [field]: value }); setMessage(""); };
+  const inputs = [["title", "Job title", "e.g. React Developer"], ["company", "Company", "e.g. CareerHub"], ["location", "Location", "e.g. Pune or Remote"], ["salary", "Salary range", "e.g. ₹8–12 LPA"]];
+  return <div className="min-h-screen bg-slate-50"><AdminNav /><main className="mx-auto max-w-6xl px-4 py-7 sm:px-6"><div className="mb-7"><p className="text-sm font-semibold text-blue-600">ADMIN DASHBOARD</p><h1 className="mt-1 text-3xl font-bold text-slate-900">Manage job openings</h1><p className="mt-2 text-sm text-slate-500">Publish roles that candidates will see in the Jobs page.</p></div><section className="mb-6 grid gap-4 sm:grid-cols-3"><div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">Registered users</p><p className="mt-1 text-3xl font-bold text-slate-900">{admin.length}</p></div><div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">Users active now</p><p className="mt-1 text-3xl font-bold text-emerald-600">{activeCount}</p></div><div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">Posts created</p><p className="mt-1 text-3xl font-bold text-blue-600">{posts.length}</p></div></section><div className="grid gap-6 lg:grid-cols-[1.1fr_.9fr]"><section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7"><h2 className="text-xl font-semibold text-slate-900">Create a job opening</h2><form onSubmit={submit} className="mt-5 grid gap-4 sm:grid-cols-2">{inputs.map(([field, label, placeholder]) => <label key={field}><span className="mb-1.5 block text-sm font-medium text-slate-700">{label}</span><input className="post-input" value={job[field]} onChange={(e) => change(field, e.target.value)} placeholder={placeholder} /></label>)}<label><span className="mb-1.5 block text-sm font-medium text-slate-700">Job type</span><select className="post-input" value={job.type} onChange={(e) => change("type", e.target.value)}><option>Full-time</option><option>Part-time</option><option>Internship</option><option>Contract</option><option>Remote</option></select></label><label className="sm:col-span-2"><span className="mb-1.5 block text-sm font-medium text-slate-700">Description <span className="font-normal text-slate-400">(optional)</span></span><textarea className="post-input min-h-28 resize-y" value={job.description} onChange={(e) => change("description", e.target.value)} placeholder="Briefly describe the role and requirements." /></label><div className="sm:col-span-2"><button className="rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700"><i className="ri-add-line mr-1" /> Publish job</button>{message && <p className={`mt-3 text-sm ${message.includes("published") ? "text-emerald-600" : "text-red-600"}`}>{message}</p>}</div></form></section><section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7"><div className="flex items-center justify-between"><h2 className="text-xl font-semibold text-slate-900">Your openings</h2><span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">{createdJobs.length}</span></div><div className="mt-5 space-y-3">{createdJobs.length === 0 ? <p className="rounded-xl bg-slate-50 p-4 text-sm text-slate-500">No jobs published yet.</p> : createdJobs.map((item) => <article key={item.id} className="rounded-xl border border-slate-200 p-4"><div className="flex justify-between gap-3"><div><h3 className="font-semibold text-slate-800">{item.title}</h3><p className="text-sm text-slate-500">{item.company} · {item.location}</p><p className="mt-1 text-xs text-blue-600">{item.type} · {item.salary}</p></div><button onClick={() => deleteJob(item.id)} className="h-fit text-sm font-medium text-red-600 hover:underline">Delete</button></div></article>)}</div></section></div></main></div>;
+};
+export default Admin;
