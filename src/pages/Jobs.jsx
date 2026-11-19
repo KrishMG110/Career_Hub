@@ -2,12 +2,16 @@ import Navbar from "../components/Navbar.jsx";
 import JobButtons from "../components/JobButtons.jsx";
 import jobsData from "../Data/jobsData.json";
 import JobCards from "./JobCards.jsx";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { JobContext } from "../Context/JobContext.jsx";
 
 const Jobs = () => {
   const { createdJobs } = useContext(JobContext);
+  const [selectedJobId, setSelectedJobId] = useState(null);
   const allJobs = [...createdJobs, ...jobsData];
+  const visibleJobs = selectedJobId === null
+    ? allJobs
+    : allJobs.filter((job) => job.id === selectedJobId);
   return (
     <div>
       <Navbar />
@@ -31,8 +35,12 @@ const Jobs = () => {
             </div>
           </div>
 
-          <JobButtons jobsData={allJobs} />
-          <JobCards jobsData={allJobs}/>
+          <JobButtons
+            jobsData={allJobs}
+            selectedJobId={selectedJobId}
+            onSelectJob={setSelectedJobId}
+          />
+          <JobCards jobsData={visibleJobs} />
           
          
         </div>
