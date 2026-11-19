@@ -16,7 +16,7 @@ const Jobs = () => {
     <div>
       <Navbar />
       <div className="min-h-[90vh] w-full p-4 sm:p-5">
-        <div className="mx-auto h-full max-w-7xl rounded-2xl bg-slate-50 p-4 sm:p-5">
+        <div className="h-full w-full rounded-2xl bg-slate-50 p-4 sm:p-5">
           <div className="mb-4"><p className="text-sm font-semibold text-blue-600">FIND YOUR NEXT ROLE</p><h1 className="text-2xl font-bold">Job openings</h1></div>
           <div className="flex justify-between items-center">
             <div>
